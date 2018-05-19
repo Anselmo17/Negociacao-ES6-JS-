@@ -9,7 +9,7 @@ class NegociacaoController {
       this._listaNegociacoes = new ListaNegociacoes();
       this._negociacoesView = new NegociacoesView($('#negociacoesView'));
 
-      this._negociacoesView.update();
+      this._negociacoesView.update(this._listaNegociacoes);
   }
   
   adiciona(event) {
