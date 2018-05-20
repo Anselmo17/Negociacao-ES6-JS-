@@ -1,12 +1,13 @@
-class NegociacoesView {
+class NegociacoesView extends View {
 
-constructor(elemento){
-  this._elemento = elemento;
-}
+    //passando o elemento a classe superior Viewss
+    constructor(elemento) {
+        super(elemento);
+    }
 
-_template(model) {
+    template(model) {
 
-  return `
+        return `
   <table class="table table-hover table-bordered">
               <thead>
                   <tr>
@@ -17,8 +18,8 @@ _template(model) {
                   </tr>
               </thead>
               <tbody>
-                ${model.negociacoes.map(n =>{
-                    return `
+                ${model.negociacoes.map(n => {
+                return `
                         <tr>
                             <td>${DateHelper.dataParaTexto(n.data)}</td>
                             <td>${n.quantidade}</td>
@@ -26,20 +27,16 @@ _template(model) {
                             <td>${n.volume}</td>
                         </tr>
                     `
-                  }).join('')}
+            }).join('')}
               </tbody>
               <tfoot>
                   <td colspan="3"></td>
-                  <td>${model.negociacoes.reduce((total , n )=> total + n.volume , 0.0)}</td>
+                  <td>${model.negociacoes.reduce((total, n) => total + n.volume, 0.0)}</td>
               </tfoot>
        </table>
       `;
     }
 
-  //convertendo o template em elemento do DOM
-  update(model){
-    this._elemento.innerHTML = this._template(model);
-  }
 
 }
 
