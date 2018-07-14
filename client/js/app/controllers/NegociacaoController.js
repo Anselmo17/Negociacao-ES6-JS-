@@ -28,12 +28,6 @@ class NegociacaoController {
         //mensagem de adicionado com sucesso
         this._mensagem.texto = "Negociação adicionada com sucesso";
 
-        //mesangem exposta na tela 
-        this._mensagem.update(this._mensagem);
-
-        //atualizando a lista de negociacão
-        this._negociacoesView.update(this._listaNegociacoes);
-
         //limpa o formulario
         this._limpaFormulario();
     }
