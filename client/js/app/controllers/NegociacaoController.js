@@ -61,11 +61,9 @@ class NegociacaoController {
 
         //esvazia a lista de negociacoes 
         this._listaNegociacoes.esvazia();
-
-
         //Mensagem caso tenha sucesso
         this._mensagem.texto = 'Negociações apagadas com sucesso';
-        this._mensagemView.update(this._mensagem)
+
     }
 
 

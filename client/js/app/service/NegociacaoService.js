@@ -1,42 +1,31 @@
 
 class NegociacaoService {
 
+    constructor() {
+        this.http = new HttpService();
+    }
+
+
+
+
     //metodo que retorna as negociacoes da semana
     obterNegociacaoDaSemana() {
 
         //retorna uma promise 
         return new Promise((resolve, reject) => {
             //fazendo requisição ajax
-            let xhr = new XMLHttpRequest();
 
-            //abrindo a requisicao e o metodo usado 
-            xhr.open('GET', 'negociacoes/semana');
-
-            //config req
-            xhr.onreadystatechange = () => {
-
-                //validando o status com ok
-                if (xhr.readyState === 4) {
-
-                    //validando o status com resposta OK
-                    if (xhr.status === 200) {
-                        console.log('sucesso')
-
-                        //convertendo em objeto javascript e fazendo um map pra cada negociacao 
-                        resolve(JSON.parse(xhr.responseText)
-                            .map(obj => {
-                                return new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)
-                            }));
-
-                    } else {
-                        console.log(xhr.responseText);
-                        reject('Não foi possivel obter as negociações da semana');
-                    }
-                }
-            };
-            xhr.send();
-        });
+            this.http.get('negociacoes/semana').then(negociacoes => {
+                resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)))
+            })
+                .catch(error => {
+                    console.log(erro);
+                    reject('Nao foi possivel obter as negociacoes da semana')
+                });
+        })
     }
+
+
 
     //metodo que retorna as negociacoes da semana anterior
     obterNegociacaoDaSemanaAnterior() {
@@ -44,78 +33,32 @@ class NegociacaoService {
         //retorna uma promise 
         return new Promise((resolve, reject) => {
             //fazendo requisição ajax
-            let xhr = new XMLHttpRequest();
 
-            //abrindo a requisicao e o metodo usado 
-            xhr.open('GET', 'negociacoes/semana');
-
-            //config req
-            xhr.onreadystatechange = () => {
-
-                //validando o status com ok
-                if (xhr.readyState === 4) {
-
-                    //validando o status com resposta OK
-                    if (xhr.status === 200) {
-                        console.log('sucesso')
-
-                        //convertendo em objeto javascript e fazendo um map pra cada negociacao 
-                        resolve(JSON.parse(xhr.responseText)
-                            .map(obj => {
-                                return new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)
-                            }));
-
-                    } else {
-                        console.log(xhr.responseText);
-                        reject('Não foi possivel obter as negociações da semana anterior');
-                    }
-                }
-
-            };
-
-            //fazendo a requisicao
-            xhr.send();
-        });
+            this.http.get('negociacoes/anterior').then(negociacoes => {
+                resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)))
+            })
+                .catch(error => {
+                    console.log(erro);
+                    reject('Nao foi possivel obter as negociacoes da semana anterior')
+                });
+        })
     }
 
     //metodo que retorna as negociacoes da semana retrasada
     obterNegociacaoDaSemanaRetrasada() {
 
+
         //retorna uma promise 
         return new Promise((resolve, reject) => {
             //fazendo requisição ajax
-            let xhr = new XMLHttpRequest();
 
-            //abrindo a requisicao e o metodo usado 
-            xhr.open('GET', 'negociacoes/semana');
-
-            //config req
-            xhr.onreadystatechange = () => {
-
-                //validando o status com ok
-                if (xhr.readyState === 4) {
-
-                    //validando o status com resposta OK
-                    if (xhr.status === 200) {
-                        console.log('sucesso')
-
-                        //convertendo em objeto javascript e fazendo um map pra cada negociacao 
-                        resolve(JSON.parse(xhr.responseText)
-                            .map(obj => {
-                                return new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)
-                            }));
-
-                    } else {
-                        console.log(xhr.responseText);
-                        reject('Não foi possivel obter as negociações da semana retrasada');
-                    }
-                }
-
-            };
-
-            //fazendo a requisicao
-            xhr.send();
-        });
+            this.http.get('negociacoes/retrasada').then(negociacoes => {
+                resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)))
+            })
+                .catch(error => {
+                    console.log(erro);
+                    reject('Nao foi possivel obter as negociacoes da semana retrasada')
+                });
+        })
     }
-
 }
